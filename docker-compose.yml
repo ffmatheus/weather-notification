@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8080:8080"
+    environment:
+      - DATABASE_URL=postgresql://weather_user:weather_pass@db:5432/weather_db?sslmode=disable
+    volumes:
+      - .:/app
+      - go_modules:/go/pkg/mod
+    depends_on:
+      - db
+    networks:
+      - weather-network
+
+  db:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=weather_user
+      - POSTGRES_PASSWORD=weather_pass
+      - POSTGRES_DB=weather_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - weather-network
+
+volumes:
+  postgres_data:
+  go_modules:
+
+networks:
+  weather-network:
+    driver: bridge
