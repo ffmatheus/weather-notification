@@ -178,7 +178,6 @@ func (h *UserHandler) ToggleOptOut(c *gin.Context) {
 		return
 	}
 
-	// Atualiza o status de opt-out do usuário
 	err = h.userService.ToggleOptOut(c.Request.Context(), userID, req.OptOut)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, Response{

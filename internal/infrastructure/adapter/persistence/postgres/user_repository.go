@@ -67,13 +67,14 @@ func (r *userRepository) Update(ctx context.Context, user *entity.User) error {
 
 func (r *userRepository) FindByID(ctx context.Context, id uuid.UUID) (*entity.User, error) {
 	query := `
-        SELECT id, name, email, opt_out, created_at, updated_at
+        SELECT id, location_id, name, email, opt_out, created_at, updated_at
         FROM users
         WHERE id = $1
     `
 	user := &entity.User{}
 	err := r.db.QueryRowContext(ctx, query, id).Scan(
 		&user.ID,
+		&user.LocationID,
 		&user.Name,
 		&user.Email,
 		&user.OptOut,
@@ -93,7 +94,7 @@ func (r *userRepository) FindByID(ctx context.Context, id uuid.UUID) (*entity.Us
 
 func (r *userRepository) FindByEmail(ctx context.Context, email string) (*entity.User, error) {
 	query := `
-        SELECT id, name, email, opt_out, created_at, updated_at
+        SELECT id, location_id, name, email, opt_out, created_at, updated_at
         FROM users
         WHERE email = $1
     `
@@ -101,6 +102,7 @@ func (r *userRepository) FindByEmail(ctx context.Context, email string) (*entity
 	user := &entity.User{}
 	err := r.db.QueryRowContext(ctx, query, email).Scan(
 		&user.ID,
+		&user.LocationID,
 		&user.Name,
 		&user.Email,
 		&user.OptOut,
@@ -144,7 +146,7 @@ func (r *userRepository) UpdateOptOut(ctx context.Context, id uuid.UUID, optOut 
 
 func (r *userRepository) FindAll(ctx context.Context) ([]entity.User, error) {
 	query := `
-		SELECT id, name, email, opt_out, created_at, updated_at
+		SELECT id, location_id, name, email, opt_out, created_at, updated_at
 		FROM users
 	`
 
@@ -159,6 +161,7 @@ func (r *userRepository) FindAll(ctx context.Context) ([]entity.User, error) {
 		user := entity.User{}
 		err := rows.Scan(
 			&user.ID,
+			&user.LocationID,
 			&user.Name,
 			&user.Email,
 			&user.OptOut,

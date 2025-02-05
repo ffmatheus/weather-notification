@@ -45,7 +45,7 @@ func (s *WeatherService) SearchLocation(ctx context.Context, cityName string) ([
 		location, err := s.locationRepo.FindByCPTECCode(ctx, loc.CPTECCode)
 		if err == nil {
 			newLocations = append(newLocations, *location)
-		} else if err != handler.ErrNotFound {
+		} else if err == handler.ErrNotFound {
 			_ = s.locationRepo.Create(ctx, &loc)
 			newLocations = append(newLocations, loc)
 		}

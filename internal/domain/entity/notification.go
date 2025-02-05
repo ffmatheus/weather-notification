@@ -1,7 +1,6 @@
 package entity
 
 import (
-	"fmt"
 	"time"
 	handler "weather-notification/internal/domain/error_handler"
 
@@ -73,15 +72,12 @@ func (g *GlobalNotification) ShouldExecute(now time.Time) bool {
 	}
 
 	currentTime := now.Format("15:04")
-	fmt.Println(currentTime)
 	scheduledTime := g.TimeOfDay.Format("15:04")
-	fmt.Println(scheduledTime)
 
 	if currentTime != scheduledTime {
 		return false
 	}
 
-	fmt.Println(g.LastExecution)
 	if g.LastExecution == nil {
 		return true
 	}

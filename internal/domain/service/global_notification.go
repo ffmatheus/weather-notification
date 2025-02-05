@@ -2,7 +2,6 @@ package service
 
 import (
 	"context"
-	"fmt"
 	"time"
 	"weather-notification/internal/domain/entity"
 	"weather-notification/internal/domain/repository"
@@ -64,7 +63,6 @@ func (s *GlobalNotificationService) ProcessActiveNotifications(ctx context.Conte
 		}
 		users, err := s.userRepo.FindAllActive(ctx)
 		if err != nil {
-			fmt.Println(err.Error())
 			continue
 		}
 

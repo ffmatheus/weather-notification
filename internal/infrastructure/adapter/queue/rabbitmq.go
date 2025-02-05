@@ -180,7 +180,7 @@ func (s *RabbitMQService) handleError(msg amqp.Delivery) {
 		case float64:
 			retryCount = int(v)
 		default:
-			fmt.Printf("Tipo inesperado para x-retry-count: %T\n", v)
+			log.Printf("Tipo inesperado para x-retry-count: %T\n", v)
 		}
 	}
 
