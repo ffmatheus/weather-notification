@@ -2,7 +2,7 @@ package repository
 
 import (
 	"context"
-	"weather-notification/internal/domain/entity" // ajuste para seu path
+	"weather-notification/internal/domain/entity"
 
 	"github.com/google/uuid"
 )

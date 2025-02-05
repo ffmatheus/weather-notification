@@ -74,3 +74,23 @@ Acesse a documentação completa da API em `/swagger/index.html`
 - Senha: teste (conforme configuração)
 
 A interface permite monitorar as filas e mensagens
+
+## Testes
+
+A aplicação possui alguns exemplos de testes automatizados que podem ser referência para a criação de novos em futuras implementações.
+
+### Estrutura
+Os testes estão organizados junto aos arquivos que testam, seguindo o sufixo `_test.go`
+
+### Executando os Testes
+```bash
+
+# Executa todos os testes
+go test ./...
+
+# Executa testes de um pacote específico
+go test ./internal/domain/entity
+
+# Executa testes com cobertura
+go test -cover ./...
+```
