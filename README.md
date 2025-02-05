@@ -26,3 +26,51 @@ O projeto segue uma arquitetura hexagonal (também conhecida pelo conceito de po
 - RabbitMQ
 - Docker
 - Docker Compose
+
+## Configuração
+
+### Pré-requisitos
+- [Go 1.23+](https://go.dev/dl/)
+- [Docker e Docker Compose](https://www.docker.com/)
+
+### Instalação
+1. Clone o repositório
+2. Copie `.env.example` para `.env` e configure as variáveis
+3. Execute: `docker-compose up -d`
+
+## API
+
+### Autenticação
+Todas as rotas requerem o header `Authorization` com um token válido. Que pode ser obtido ou configurado através da env API_TOKEN
+
+### Endpoints
+
+#### Usuários
+- `POST /api/users` - Criar usuário
+- `PUT /api/users/{id}` - Atualizar usuário
+- `PATCH /api/users/{id}/optout` - Atualizar opt-out
+- `GET /api/users` - Listar usuários
+
+#### Notificações
+- `POST /api/notifications` - Agendar notificação
+- `GET /api/notifications` - Listar notificações do usuário
+
+#### Clima
+- `GET /api/weather/search` - Buscar cidade
+- `GET /api/weather/forecast` - Buscar previsão
+
+#### Notificações Globais
+- `POST /api/notifications/global` - Criar notificação global
+- `GET /api/notifications/global` - Listar notificações globais
+
+### Documentação
+Acesse a documentação completa da API em `/swagger/index.html`
+
+## Acessando Interfaces
+
+#### RabbitMQ
+- URL: http://localhost:15672
+- Usuario: teste (conforme configuração)
+- Senha: teste (conforme configuração)
+
+A interface permite monitorar as filas e mensagens
