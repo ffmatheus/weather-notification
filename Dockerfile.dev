@@ -2,13 +2,9 @@ FROM golang:1.23-alpine
 
 WORKDIR /app
 
-RUN apk add --no-cache gcc musl-dev git
+RUN apk add --no-cache gcc musl-dev git curl bash
 
-RUN git clone https://github.com/air-verse/air.git \
-    && cd air \
-    && go build -o /go/bin/air \
-    && cd .. \
-    && rm -rf air
+RUN curl -o /usr/local/bin/wait-for-it https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh && chmod +x /usr/local/bin/wait-for-it
 
 COPY go.mod go.sum ./
 RUN go mod download
@@ -17,4 +13,4 @@ COPY . .
 
 EXPOSE 8080
 
-CMD ["air", "-c", ".air.toml"]
+CMD ["sh", "-c", "/usr/local/bin/wait-for-it rabbitmq:5672 -- go run main.go"]
