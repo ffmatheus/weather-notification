@@ -1,6 +1,9 @@
 package handler
 
-import "time"
+import (
+	"time"
+	"weather-notification/internal/domain/entity"
+)
 
 //WEATHER
 
@@ -39,4 +42,11 @@ type UpdateUserRequest struct {
 
 type ToggleOptOutRequest struct {
 	OptOut bool `json:"opt_out" binding:"boolean"`
+}
+
+//NOTIFICATION
+
+type CreateGlobalNotificationRequest struct {
+	TimeOfDay string           `json:"time_of_day" binding:"required" example:"14:00"`
+	Frequency entity.Frequency `json:"frequency" binding:"required,oneof=DIARIA SEMANAL" example:"DIARIA | SEMANAL"`
 }

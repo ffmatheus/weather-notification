@@ -8,12 +8,20 @@ services:
     ports:
       - "8080:8080"
     environment:
+      - TZ=America/Sao_Paulo
       - DATABASE_URL=postgresql://weather_user:weather_pass@db:5432/weather_db?sslmode=disable
+      - CPTEC_BASE_URL=http://servicos.cptec.inpe.br/XML
+      - API_TOKEN=testando
+      - RABBITMQ_URL=amqp://teste:teste@rabbitmq:5672/
+      - WEBHOOK_URL=http://localhost:8080/api/webhook/test/notifications
     volumes:
       - .:/app
       - go_modules:/go/pkg/mod
     depends_on:
-      - db
+      rabbitmq:
+        condition: service_healthy
+      db:
+        condition: service_started
     networks:
       - weather-network
 
@@ -31,9 +39,28 @@ services:
     networks:
       - weather-network
 
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672" 
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=teste
+      - RABBITMQ_DEFAULT_PASS=teste
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - weather-network
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "status"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
 volumes:
   postgres_data:
   go_modules:
+  rabbitmq_data:
 
 networks:
   weather-network:
