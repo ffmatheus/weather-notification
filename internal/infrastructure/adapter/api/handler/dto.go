@@ -30,8 +30,8 @@ type WaveInfo struct {
 //USER
 
 type CreateUserRequest struct {
-	Name  string `json:"name" binding:"required" example:"John Doe"`
-	Email string `json:"email" binding:"required,email" example:"john@example.com"`
+	Name  string `json:"name" binding:"required" example:"Matheus"`
+	Email string `json:"email" binding:"required,email" example:"matheus@exemplo.com"`
 	City  string `json:"city" binding:"required" example:"São Paulo"`
 }
 

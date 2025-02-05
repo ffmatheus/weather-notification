@@ -41,7 +41,7 @@ func (w *NotificationWorker) processNotification(notification *entity.Notificati
 
 	if time.Now().Before(notification.ScheduledFor) {
 		log.Printf("Notificação %s agendada para futuro: %v", notification.ID, notification.ScheduledFor)
-		return nil // Ainda não é hora
+		return nil
 	}
 
 	forecast, err := w.weatherSvc.GetForecast(w.ctx, notification.LocationID)

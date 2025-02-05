@@ -608,11 +608,11 @@ const docTemplate = `{
                 },
                 "email": {
                     "type": "string",
-                    "example": "john@example.com"
+                    "example": "matheus@exemplo.com"
                 },
                 "name": {
                     "type": "string",
-                    "example": "John Doe"
+                    "example": "Matheus"
                 }
             }
         },

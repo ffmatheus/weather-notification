@@ -45,10 +45,10 @@ definitions:
         example: São Paulo
         type: string
       email:
-        example: john@example.com
+        example: matheus@exemplo.com
         type: string
       name:
-        example: John Doe
+        example: Matheus
         type: string
     required:
     - city
