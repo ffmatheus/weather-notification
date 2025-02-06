@@ -8,13 +8,13 @@ import (
 )
 
 type User struct {
-	ID         uuid.UUID
-	LocationID uuid.UUID
-	Name       string
-	Email      string
-	OptOut     bool
-	CreatedAt  time.Time
-	UpdatedAt  time.Time
+	ID         uuid.UUID `json:"id"`
+	LocationID uuid.UUID `json:"location_id"`
+	Name       string    `json:"name"`
+	Email      string    `json:"email"`
+	OptOut     bool      `json:"opt_out"`
+	CreatedAt  time.Time `json:"created_at"`
+	UpdatedAt  time.Time `json:"updated_at"`
 }
 
 func NewUser(name, email string, locationID uuid.UUID) (*User, error) {

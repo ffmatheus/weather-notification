@@ -16,51 +16,6 @@ const docTemplate = `{
     "basePath": "{{.BasePath}}",
     "paths": {
         "/api/notifications": {
-            "get": {
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "description": "Retorna todas as notificações de um usuário específico",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Notificações"
-                ],
-                "summary": "Lista notificações do usuário",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "format": "uuid",
-                        "description": "ID do usuário",
-                        "name": "user_id",
-                        "in": "query",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/handler.Response"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/handler.Response"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/handler.Response"
-                        }
-                    }
-                }
-            },
             "post": {
                 "security": [
                     {
@@ -172,6 +127,53 @@ const docTemplate = `{
                 "responses": {
                     "201": {
                         "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/handler.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/handler.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/handler.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/notifications/{user_id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Retorna todas as notificações de um usuário específico",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Notificações"
+                ],
+                "summary": "Lista notificações do usuário",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "ID do usuário",
+                        "name": "user_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/handler.Response"
                         }
@@ -503,7 +505,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "RECEPTOR"
+                    "Receptor"
                 ],
                 "summary": "Recebe notificações (endpoint de teste)",
                 "parameters": [
@@ -564,7 +566,7 @@ const docTemplate = `{
                             "$ref": "#/definitions/entity.Frequency"
                         }
                     ],
-                    "example": "DIARIA | SEMANAL"
+                    "example": "DIARIA"
                 },
                 "time_of_day": {
                     "type": "string",
