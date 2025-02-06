@@ -83,7 +83,7 @@ func (h *NotificationHandler) Create(c *gin.Context) {
 // @Success 200 {object} Response
 // @Failure 400 {object} Response
 // @Failure 500 {object} Response
-// @Router /api/notifications [get]
+// @Router /api/notifications/{user_id} [get]
 func (h *NotificationHandler) List(c *gin.Context) {
 	userID, err := uuid.Parse(c.Query("user_id"))
 	if err != nil {

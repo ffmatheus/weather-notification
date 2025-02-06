@@ -8,10 +8,10 @@ import (
 )
 
 type Location struct {
-	ID        uuid.UUID
-	CPTECCode int
-	Name      string
-	State     string
+	ID        uuid.UUID `json:"id"`
+	CPTECCode int       `json:"cptecCode"`
+	Name      string    `json:"name"`
+	State     string    `json:"state"`
 }
 
 func NewLocation(cptecCode int, name, state string) (*Location, error) {

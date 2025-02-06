@@ -59,6 +59,13 @@ func (h *UserHandler) Create(c *gin.Context) {
 		return
 	}
 
+	if len(locations) == 0 {
+		c.JSON(http.StatusInternalServerError, Response{
+			Error: "localização não encontrada",
+		})
+		return
+	}
+
 	err = h.userService.Create(c.Request.Context(), req.Name, req.Email, locations[0].ID)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, Response{
@@ -108,6 +115,12 @@ func (h *UserHandler) Update(c *gin.Context) {
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, Response{
 				Error: "erro ao buscar localização: " + err.Error(),
+			})
+			return
+		}
+		if len(location) == 0 {
+			c.JSON(http.StatusNotFound, Response{
+				Error: "localização não encontrada",
 			})
 			return
 		}

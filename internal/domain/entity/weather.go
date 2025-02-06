@@ -8,45 +8,43 @@ import (
 )
 
 type WeatherForecast struct {
-	Date     time.Time
-	MinTemp  float64
-	MaxTemp  float64
-	Forecast string
-	UV       float64
-	Wave     *WaveInfo
+	Date     time.Time `json:"date"`
+	MinTemp  float64   `json:"min_temp"`
+	MaxTemp  float64   `json:"max_temp"`
+	Forecast string    `json:"forecast"`
+	UV       float64   `json:"uv"`
+	Wave     *WaveInfo `json:"wave,omitempty"`
 }
 
 type WaveInfo struct {
-	UpdateTime string     `xml:"atualizacao"`
-	Morning    WavePeriod `xml:"manha"`
-	Afternoon  WavePeriod `xml:"tarde"`
-	Night      WavePeriod `xml:"noite"`
+	UpdateTime string     `xml:"atualizacao" json:"update_time"`
+	Morning    WavePeriod `xml:"manha" json:"morning"`
+	Afternoon  WavePeriod `xml:"tarde" json:"afternoon"`
+	Night      WavePeriod `xml:"noite" json:"night"`
 }
 
 type WavePeriod struct {
-	Date      string  `xml:"dia"`
-	Agitation string  `xml:"agitacao"`
-	Height    float64 `xml:"altura"`
-	Direction string  `xml:"direcao"`
-	WindSpeed float64 `xml:"vento"`
-	WindDir   string  `xml:"vento_dir"`
+	Date      string  `xml:"dia" json:"date"`
+	Agitation string  `xml:"agitacao" json:"agitation"`
+	Height    float64 `xml:"altura" json:"height"`
+	Direction string  `xml:"direcao" json:"direction"`
+	WindSpeed float64 `xml:"vento" json:"wind_speed"`
+	WindDir   string  `xml:"vento_dir" json:"wind_dir"`
 }
 
 type WeatherForecastCollection struct {
-	LocationID uuid.UUID
-	Nome       string
-	UF         string
-	Forecasts  []WeatherForecast
-	UpdatedAt  time.Time
+	Nome      string            `json:"nome"`
+	UF        string            `json:"uf"`
+	Forecasts []WeatherForecast `json:"forecasts"`
+	UpdatedAt time.Time         `json:"updated_at"`
 }
 
 func NewWeatherForecastCollection(locationID uuid.UUID, nome, uf string, forecasts []WeatherForecast) *WeatherForecastCollection {
 	return &WeatherForecastCollection{
-		LocationID: locationID,
-		Nome:       nome,
-		UF:         uf,
-		Forecasts:  forecasts,
-		UpdatedAt:  time.Now(),
+		Nome:      nome,
+		UF:        uf,
+		Forecasts: forecasts,
+		UpdatedAt: time.Now(),
 	}
 }
 

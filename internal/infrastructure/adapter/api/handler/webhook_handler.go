@@ -15,7 +15,7 @@ func NewWebhookHandler() *WebhookHandler {
 
 // @Summary Recebe notificações (endpoint de teste)
 // @Description Endpoint para testar o recebimento de notificações genéricas
-// @Tags RECEPTOR
+// @Tags Receptor
 // @Security BearerAuth
 // @Accept json
 // @Produce json

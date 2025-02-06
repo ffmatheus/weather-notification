@@ -63,8 +63,18 @@ Todas as rotas requerem o header `Authorization` com um token válido. Que pode 
 - `POST /api/notifications/global` - Criar notificação global
 - `GET /api/notifications/global` - Listar notificações globais
 
+## Utilização
+
+- Criação de usuário fornecendo o nome da cidade, nome do usuário e e-mail
+- Ao buscar uma cidade, caso ela ainda não tenha sido armazenada na base de dados, é feita a persistência do dado
+- Para buscar o uuid de uma cidade, basta usar o endpoint de busca/listagem
+- As notificações globais notificam TODOS os usuários com opt-out FALSE, com as informações de suas respectivas cidades vinculadas no cadastro
+- Nas notificações customizáveis, o usuário consegue criar horários específicos e adicionar notificações de outras cidades
+
 ### Documentação
 Acesse a documentação completa da API em `/swagger/index.html`
+
+Para autenticar as requisições, no Authorize adicionar "Bearer" + API_TOKEN (variável de ambiente)
 
 ## Acessando Interfaces
 

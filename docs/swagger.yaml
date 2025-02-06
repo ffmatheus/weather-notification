@@ -15,7 +15,7 @@ definitions:
         enum:
         - DIARIA
         - SEMANAL
-        example: DIARIA | SEMANAL
+        example: DIARIA
       time_of_day:
         example: "14:00"
         type: string
@@ -83,35 +83,6 @@ info:
   version: "1.0"
 paths:
   /api/notifications:
-    get:
-      description: Retorna todas as notificações de um usuário específico
-      parameters:
-      - description: ID do usuário
-        format: uuid
-        in: query
-        name: user_id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/handler.Response'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/handler.Response'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/handler.Response'
-      security:
-      - BearerAuth: []
-      summary: Lista notificações do usuário
-      tags:
-      - Notificações
     post:
       consumes:
       - application/json
@@ -141,6 +112,36 @@ paths:
       security:
       - BearerAuth: []
       summary: Agenda uma nova notificação
+      tags:
+      - Notificações
+  /api/notifications/{user_id}:
+    get:
+      description: Retorna todas as notificações de um usuário específico
+      parameters:
+      - description: ID do usuário
+        format: uuid
+        in: query
+        name: user_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.Response'
+      security:
+      - BearerAuth: []
+      summary: Lista notificações do usuário
       tags:
       - Notificações
   /api/notifications/global:
@@ -411,7 +412,7 @@ paths:
       - BearerAuth: []
       summary: Recebe notificações (endpoint de teste)
       tags:
-      - RECEPTOR
+      - Receptor
 securityDefinitions:
   BearerAuth:
     in: header

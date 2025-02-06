@@ -48,5 +48,5 @@ type ToggleOptOutRequest struct {
 
 type CreateGlobalNotificationRequest struct {
 	TimeOfDay string           `json:"time_of_day" binding:"required" example:"14:00"`
-	Frequency entity.Frequency `json:"frequency" binding:"required,oneof=DIARIA SEMANAL" example:"DIARIA | SEMANAL"`
+	Frequency entity.Frequency `json:"frequency" binding:"required,oneof=DIARIA SEMANAL" example:"DIARIA"`
 }

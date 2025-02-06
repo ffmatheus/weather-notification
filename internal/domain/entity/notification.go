@@ -19,24 +19,24 @@ const (
 )
 
 type GlobalNotification struct {
-	ID            uuid.UUID
-	TimeOfDay     time.Time
-	Frequency     Frequency
-	Active        bool
-	LastExecution *time.Time
-	CreatedAt     time.Time
+	ID            uuid.UUID  `json:"id"`
+	TimeOfDay     time.Time  `json:"time_of_day"`
+	Frequency     Frequency  `json:"frequency"`
+	Active        bool       `json:"active"`
+	LastExecution *time.Time `json:"last_execution"`
+	CreatedAt     time.Time  `json:"created_at"`
 }
 
 type Notification struct {
-	ID           uuid.UUID
-	UserID       uuid.UUID
-	LocationID   uuid.UUID
-	Content      WeatherForecastCollection
-	Status       NotificationStatus
-	ScheduledFor time.Time
-	SentAt       *time.Time
-	CreatedAt    time.Time
-	UpdatedAt    time.Time
+	ID           uuid.UUID                 `json:"id"`
+	UserID       uuid.UUID                 `json:"user_id"`
+	LocationID   uuid.UUID                 `json:"location_id"`
+	Content      WeatherForecastCollection `json:"content"`
+	Status       NotificationStatus        `json:"status"`
+	ScheduledFor time.Time                 `json:"scheduled_for"`
+	SentAt       *time.Time                `json:"sent_at"`
+	CreatedAt    time.Time                 `json:"created_at"`
+	UpdatedAt    time.Time                 `json:"updated_at"`
 }
 
 func NewNotification(userID, locationID uuid.UUID, content WeatherForecastCollection, scheduledFor time.Time) (*Notification, error) {
